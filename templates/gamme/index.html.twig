@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} Gamme{% endblock %}
+
+
+
+
+
+
+{% block body %}
+<h1>Liste des Gammes Informatiques</h1><br>
+<ul>
+{% for item in gamme %}
+    <li>{{ item|title }}</li>
+{% endfor %}
+</ul>
+{% endblock %}
