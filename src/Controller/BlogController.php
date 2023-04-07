@@ -5,15 +5,19 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\taxes\calcul;
 
 class BlogController extends AbstractController
 {
+
     #[Route('/blog', name: 'app_blog')]
-    public function index(): Response
+    public function index(calcul $obj): Response
     {
-        return $this->render('blog/index.html.twig', [
-            'controller_name' => 'BlogController',
-        ]);
+        $pu =100;
+        $tva =0.02;
+        $mtva =$obj->calculMontantTva($pu,$tva);
+        $mttc =$obj->calculMontantTTC($pu,$tva);
+        return new Response("<h1>Le montant tva est $mtva <br>le montant TTC est $mttc");
     }
 
     #[Route('/blog/list', name: 'app_blog_list')]
